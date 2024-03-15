@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind  utilities;
+
+body{
+    height: 100vh;
+    width: 100%;
+}
+
+/* .header{
+    @apply ;
+} */
+  
+
+/* @tailwind base; how it was before i put the @import */
+
+/* okay so i usually have an error here @tailwind base.. now with the use of import and the apparentices it has been normalised */
+/* another way to go about this is to go to my settings, typed lint and at cssat unknown rules,i set it to ignore instad of warning */
+/* so as long as it is a yellow line, it is just a warning and nothing serious about it so long it works. */
