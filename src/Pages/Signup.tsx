@@ -1,12 +1,12 @@
 import { useState } from "react";
-// import Button from "../components/Button";
+
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import google from "../assets/images/google.svg";
 import apple from "../assets/images/apple.svg";
 import { useAuthContext } from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
-// import { auth } from "../config/firebaseConfig";
+
 
 function Signup() {
   const { googleSignIn, createUser } = useAuthContext();

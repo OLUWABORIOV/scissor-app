@@ -64,18 +64,17 @@ function Login() {
             <div className=" sign-up with apple and google flex items-center flex-col p-8 gap-8 w-1/2">
               <h3>Log in with:</h3>
               <div className=" flex items-center justify-center w-[109px] h-[40px] gap-9">
-                <div className="btn-1 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm ">
+                <button className="btn-1 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
+                 onClick={handleGoogleSubmit}>
                   <img src={google} alt="google" />
-                  {/* <Button label=" Google" onClick={handleGoogleSubmit} /> */}
-                  <button onClick={handleClick}>
                     Google
-                  </button>
-                </div>
-                <div className="btn-2 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm ">
+                  
+                </button>
+                <button className="btn-2 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
+                onClick={handleClick}>
                   <img src={apple} alt="apple" />
-                  {/* <Button label="  Apple" onClick={handleClick} /> */}
-                  <button onClick={handleClick}>Apple</button>
-                </div>
+                   Apple
+                </button>
               </div>
 
               <div className="line flex items-center gap-4">
@@ -141,7 +140,6 @@ function Login() {
                     onClick={handleSubmit}
                     className="w-[460px] h-[48px] px-[12px] py-[24px] m-9 flex items-center justify-center bg-[#005AE2] hover:[#005AE2] text-white text-[14px] rounded-full"
                   >
-                    {/* <Button label="Log in" /> */}
                     Login
                   </button>
               </div>
