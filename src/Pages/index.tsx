@@ -11,4 +11,5 @@ export { default as OnBoarding } from "./OnBoarding";
 export { default as UrlShortnerPg} from "./UrlShortnerPg";
 export { default as QrPage} from "./QrPage";
 export { default as Custompg} from "./Custompg";
-export { default as Analysis } from "./Analysis";
+export { default as HistoryPage } from "./HistoryPage"; 
+

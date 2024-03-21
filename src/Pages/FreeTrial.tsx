@@ -60,25 +60,6 @@ const FreeTrial: React.FunctionComponent<IFreeTrialProps> = () => {
             <h1 className="text-[#0065FE] font-bold text-3xl">SCISSOR</h1>
           </div>
 
-          <div className="flex p-5 ">
-            <ul className="flex gap-10 items-center capitalize text-white text-[17px]">
-              <li className="my-urls ]">
-                <a href="#url">my urls</a>
-              </li>
-              <li>
-                <a href="#features">features</a>
-              </li>
-              <li>
-                <a href="#price">pricing</a>
-              </li>
-              <li>
-                <a href="">analysis</a>
-              </li>
-              <li>
-                <a href="#faQs">fAQs</a>
-              </li>
-            </ul>
-          </div>
         </div>
         <div className="  form-section flex flex-col justify-center mt-10 items-center ">
           <p className="uppercase text-2xl">

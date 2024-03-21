@@ -10,9 +10,9 @@ function LandingPage() {
   useEffect(() => {
     const intervalId = setInterval(() =>{
       history("/Home");
-    }, 3000);  //that is at 3 seconds it should change.
+    }, 3000);
     return () => clearInterval(intervalId);
-  }, [history]);   //clearing the interval to make it to stop changing
+  }, [history]);   
 
 
   return (

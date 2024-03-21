@@ -1,11 +1,8 @@
 import * as React from "react";
-import Sline from "../assets/images/Sline.svg";
-import Vectorhead from "../assets/images/Vectorhead.svg";
 import axios from "axios";
-import { auth } from "../config/firebaseConfig";
-import { useNavigate } from "react-router-dom";
 import customize from "../assets/images/customize.svg";
 import { useState } from "react";
+import { HeaderPg } from "../components";
 
 interface ICustompgProps {}
 const Custompg: React.FunctionComponent<ICustompgProps> = () => {
@@ -15,7 +12,7 @@ const Custompg: React.FunctionComponent<ICustompgProps> = () => {
   const [copyButtonText, setCopyButtonText] = React.useState<string>("");
   const [customAlias, setCustomAlias] = React.useState<string>("   ");
   const [displayCustomize, setDisplayCustomize] = useState(false);
-  const navigate = useNavigate();
+
 
   const shortenURL = async () => {
     try {
@@ -55,17 +52,6 @@ const Custompg: React.FunctionComponent<ICustompgProps> = () => {
         setErrorMessage("Copy failed. Please try again.");
       });
   };
-  const handleLogout = () => {
-    auth
-      .signOut()
-      .then(() => {
-        console.log("User logged out successfully.");
-        navigate("/Login");
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-      });
-  };
   const toggleCustomize = () => {
     setDisplayCustomize((prev) => !prev);
   };
@@ -101,49 +87,12 @@ const Custompg: React.FunctionComponent<ICustompgProps> = () => {
 
   return (
     <>
-      <div className=" flex flex-col  items-center h-[100vh] bg-slate-400">
-        <div className="header flex justify-between h-[80px] items-center w-full bg-slate-700 px-9 z-auto  ">
-          <div className="logo flex  justify-center items-center ">
-            <img src={Sline} alt="S-Line" />
-            <img src={Vectorhead} alt="line" />
-            <h1 className="text-[#0065FE] font-bold text-3xl">SCISSOR</h1>
-          </div>
-
-          <div className="flex p-5 ">
-            <ul className="flex gap-10 items-center capitalize text-white text-[17px]">
-              <li className="my-urls ]">
-                <a href="#url">my urls</a>
-              </li>
-              <li>
-                <a href="#features">features</a>
-              </li>
-              <li>
-                <a href="#price">pricing</a>
-              </li>
-              <li>
-                <a href="">analysis</a>
-              </li>
-              <li>
-                <a href="#faQs">fAQs</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex justify-center items-center gap-5 ">
-            <p className="message  text-[18px] text-white">
-              Welcome,{auth.currentUser?.email || "anonymous"}
-            </p>
-            <div>
-              <button
-                className="border bg-white text-slate-700 hover:bg-slate-200 rounded-md py-2 px-4 items-center"
-                onClick={handleLogout}
-              >
-                Log out
-              </button>
-            </div>
-          </div>
+    <div className="">
+        <div className="">
+        < HeaderPg />
         </div>
-        <div className="  form-section flex flex-col justify-center mt-10 items-center ">
+      <div className=" flex flex-col  items-center h-[100vh] pt-[100px]  bg-slate-400">
+        <div className="  form-section flex flex-col justify-center items-center ">
           <p className="uppercase text-2xl">
             shorten and customize your long url here
           </p>
@@ -225,6 +174,7 @@ const Custompg: React.FunctionComponent<ICustompgProps> = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

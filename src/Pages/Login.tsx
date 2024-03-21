@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import google from "../assets/images/google.svg";
@@ -38,7 +37,7 @@ function Login() {
     return valid;
   };
   const navigate = useNavigate();
-  //
+
   const handleSubmit = async () => {
     try {
       if(validateForm()) {
@@ -64,13 +63,13 @@ function Login() {
             <div className=" sign-up with apple and google flex items-center flex-col p-8 gap-8 w-1/2">
               <h3>Log in with:</h3>
               <div className=" flex items-center justify-center w-[109px] h-[40px] gap-9">
-                <button className="btn-1 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
+                <button className="btn-1 flex py-2 px-8 text-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
                  onClick={handleGoogleSubmit}>
                   <img src={google} alt="google" />
                     Google
                   
                 </button>
-                <button className="btn-2 flex py-2 px-8 text-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
+                <button className="btn-2 flex py-2 px-8 text-center items-center bg-blue-700 hover:bg-blue-800 text-white rounded-sm "
                 onClick={handleClick}>
                   <img src={apple} alt="apple" />
                    Apple

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Header from "../components/Header";
-// import Button from "../components/Button";
+
 
 function GetaQuote() {
   const [firstName, setFirstName] = useState("");
@@ -302,7 +302,6 @@ function GetaQuote() {
               <div className="getaquote-btn flex justify-center items-center ">
                 <button className="bg-[#005AE2] w-1/2 text-white px-0.5 py-3 rounded-full"onClick={handleClick}>
                   {" "}
-                  {/* <Button label="Submit" onClick={handleClick} />{" "} */}
                   Submit
                 </button>
               </div>

@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  Analysis,
   Custompg,
   FreeTrial,
   GetaQuote,
+  HistoryPage,
   Home,
   LandingPage,
   Login,
@@ -14,6 +14,14 @@ import {
   UrlShortner,
   UrlShortnerPg,
 } from "../Pages";
+ 
+import{
+FaqSection,
+FeaturesPg,
+UrlSectionPg,
+Analysis,
+
+} from "../components";
 
 const pages = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
@@ -28,13 +36,22 @@ const pages = createBrowserRouter([
   { path: "/urlshortner", element: <UrlShortnerPg /> },
   { path: "/qrpage", element: <QrPage /> },
   { path: "/custom", element: <Custompg /> },
-  { path: "/analysis", element: <Analysis /> },
+  {  path: "/history", element: <HistoryPage /> },
+  { path: "/analysis", element: <Analysis/>},
+  { path: "/faqs", element: <FaqSection/>},
+  { path: "/url", element: <UrlSectionPg/>},
+  { path: "/feature", element: <FeaturesPg/>},
 ]);
+
+
+
+
 
 function Index() {
   return (
     <div>
       <RouterProvider router={pages} />
+      
     </div>
   );
 }

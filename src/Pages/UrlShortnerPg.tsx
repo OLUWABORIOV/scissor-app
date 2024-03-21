@@ -1,15 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
-import Sline from "../assets/images/Sline.svg";
-import Vectorhead from "../assets/images/Vectorhead.svg";
 import download from "../assets/images/download.svg";
 import send from "../assets/images/send.svg";
 import qrcodesolid from "../assets/images/qrcodesolid.svg";
 import customize from "../assets/images/customize.svg";
 import QRCode from "qrcode.react";
 import { useRef } from "react";
-import { auth } from "../config/firebaseConfig"
-import { useNavigate } from "react-router-dom";
+import { db } from "../config/firebaseConfig";
+import { updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { HeaderPg } from "../components";
 
 const ShortenURLForm = () => {
   const [originalURL, setOriginalURL] = useState("");
@@ -21,7 +20,19 @@ const ShortenURLForm = () => {
   const [displayQrCode, setDisplayQrCode] = useState(false);
   const qrCodeRef = useRef<HTMLDivElement>(null);
   const [qrCodeCopied, setQrCodeCopied] = useState(false);
-  const navigate = useNavigate();
+
+  const [count, setCount] = useState({});
+
+  const docRef = doc(db, "clicks", "Xg8edvpQwtdX0Y3V0Iv0");
+  onSnapshot(docRef, (docSnap) => {
+    const previousData: any = docSnap.data();
+
+    const newData: any = {
+      total: previousData.total + 1,
+    };
+
+    setCount(newData);
+  });
 
   const shortenURL = async () => {
     try {
@@ -38,12 +49,19 @@ const ShortenURLForm = () => {
           },
         }
       );
-
       setShortenedURL(response.data.id);
     } catch (error) {
       console.error("Error shortening URL:", error);
       setErrorMessage("Error shortening URL. Please try again.");
     }
+
+    updateDoc(docRef, count)
+      .then(() => {
+        count;
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+      });
   };
 
   const customizeAlias = async () => {
@@ -134,59 +152,14 @@ const ShortenURLForm = () => {
       console.log("Web Share API not supported");
     }
   };
-  const handleLogout = () => {
-    auth.signOut()
-      .then(() => {
-        console.log("User logged out successfully.");
-        navigate("/Login");
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-      });
-  };
 
   return (
-    <div className=" flex flex-col  items-center h-[100vh] bg-slate-400">
-    <div className="header flex justify-between h-[80px] items-center w-full bg-slate-700 px-9 z-auto  ">
-      <div className="logo flex  justify-center items-center ">
-        <img src={Sline} alt="S-Line" />
-        <img src={Vectorhead} alt="line" />
-        <h1 className="text-[#0065FE] font-bold text-3xl">SCISSOR</h1>
+    <>
+      <div>
+        <HeaderPg />
       </div>
-
-        <div className="flex p-5 ">
-          <ul className="flex gap-10 items-center capitalize text-white text-[17px]">
-            <li className="my-urls ]">
-              <a href="#url">my urls</a>
-            </li>
-            <li>
-              <a href="#features">features</a>
-            </li>
-            <li>
-              <a href="#price">pricing</a>
-            </li>
-            <li>
-              <a href="">analysis</a>
-            </li>
-            <li>
-              <a href="#faQs">fAQs</a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="flex justify-center items-center gap-5">
-          <p className="message  text-[18px] text-white">
-          Welcome, {auth.currentUser?.email || 'anonymous'}
-          </p>
-          <div>
-            <button className="border bg-white hover:bg-slate-200 text-slate-700 cursor-pointer rounded-md py-2 px-4 items-center"
-            onClick={handleLogout}>
-              Log out
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="  form-section flex flex-col justify-center mt-10  items-center ">
+    <div className=" flex flex-col  items-center h-[100vh] pt-[100px] bg-slate-400">
+      <div className="  form-section flex flex-col justify-center mt-10   items-center ">
         <h1 className="header uppercase text-3xl mb-5">
           Shorten Your Long <strong style={{ color: "blue" }}>URL</strong> Here
         </h1>
@@ -280,32 +253,33 @@ const ShortenURLForm = () => {
               <div className=" flex flex-col gap-3">
                 <h2 className="text-[22px] capitalize">generate Qr code</h2>
                 <div className="flex gap-10 items-center">
-                <div className="qr-container__qr-code" ref={qrCodeRef}>
-                  {" "}
-                  <QRCode
-                    value={shortenedURL}
-                    size={200}
-                    fgColor="black"
-                    bgColor="white"
-                    level="H"
-                  />
-                </div>
-                <div className="copy&share-btn flex flex-col gap-7 my-auto">
-                  <button
-                    onClick={generateQrCode}
-                    className="px-7 py-2.5 text-[18px] flex gap-4 text-center text-white border border-transparent rounded-md bg-slate-700 hover:bg-slate-500 hover:transition-all 5s ease-in-out"
-                  >
-                    {/* {qrCodeCopied && "copied"} */}
-                    {qrCodeCopied}
-                    <img src={download} alt="download" className="w-[25px]" />Download
-                  </button>
-                  <button
-                    onClick={share}
-                    className="px-7 py-2.5 text-[18px] flex gap-4  text-center text-white border border-transparent rounded-md bg-slate-700 hover:bg-slate-500 hover:transition-all 5s ease-in-out"
-                  >
-                   <img src={send} alt="share" className="w-[25px]" /> Share
-                  </button>
-                </div>
+                  <div className="qr-container__qr-code" ref={qrCodeRef}>
+                    {" "}
+                    <QRCode
+                      value={shortenedURL}
+                      size={200}
+                      fgColor="black"
+                      bgColor="white"
+                      level="H"
+                    />
+                  </div>
+                  <div className="copy&share-btn flex flex-col gap-7 my-auto">
+                    <button
+                      onClick={generateQrCode}
+                      className="px-7 py-2.5 text-[18px] flex gap-4 text-center text-white border border-transparent rounded-md bg-slate-700 hover:bg-slate-500 hover:transition-all 5s ease-in-out"
+                    >
+                      {/* {qrCodeCopied && "copied"} */}
+                      {qrCodeCopied}
+                      <img src={download} alt="download" className="w-[25px]" />
+                      Download
+                    </button>
+                    <button
+                      onClick={share}
+                      className="px-7 py-2.5 text-[18px] flex gap-4  text-center text-white border border-transparent rounded-md bg-slate-700 hover:bg-slate-500 hover:transition-all 5s ease-in-out"
+                    >
+                      <img src={send} alt="share" className="w-[25px]" /> Share
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -313,7 +287,7 @@ const ShortenURLForm = () => {
         </div>
       </div>
     </div>
-    
+    </>
   );
 };
 

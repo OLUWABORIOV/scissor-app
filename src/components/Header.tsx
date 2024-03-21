@@ -1,16 +1,14 @@
-
-// import Button from "./Button";
 import { Link } from "react-router-dom"
 import Sline from "../assets/images/Sline.svg";
 import Vectorhead from "../assets/images/Vectorhead.svg";
 
 function Header() {
   const handleClick = () => {
-    // Your click event logic
+  
     console.log("Button clicked!");
   };
   return (
-    <div className= "header w-full fixed px-4 top-0 z-50 bg-red-100  md:bg-slate-500  lg:bg-white">
+    <div className= "header w-full fixed px-4 top-0 z-50 bg-[#1E3448]  lg:bg-white">
     <div className="h-[44px] flex justify-between items-center">
       <div className="logo flex mx-auto ">
         <img src={Sline} alt="S-Line" />
@@ -20,10 +18,10 @@ function Header() {
       <div className="flex p-5 ">
           <ul className="flex gap-10 items-center capitalize">
             <li className="my-urls text-[#0065FE]">
-             <a href="">my urls</a></li>
+             <a href="#url">my urls</a></li>
           <li><a href="#features">features</a></li>
           <li><a href="#price">pricing</a></li>
-          <li><a href=""></a>analysis</li>
+          <li><a href="#analysis">analysis</a></li>
           <li><a href="#faQs">fAQs</a></li>
         </ul>
       </div>
