@@ -45,7 +45,7 @@ const ShortenURLForm = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer 0c524e39803d2ddaf890a01e291a3f403ecec9de",
+            Authorization: "Bearer 45cf21c27262bb12567d02f17fa7a7ffc5a667c9",
           },
         }
       );
