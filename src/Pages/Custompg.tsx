@@ -35,6 +35,7 @@ const Custompg: React.FunctionComponent<ICustompgProps> = () => {
     } catch (error) {
       console.error("Error shortening URL:", error);
       setErrorMessage("Error shortening URL. Please try again.");
+      console.log(errorMessage)
     }
   };
   const copyToClipboard = () => {

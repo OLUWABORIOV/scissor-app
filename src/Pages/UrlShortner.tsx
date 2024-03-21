@@ -32,6 +32,7 @@ const UrlShortner: React.FunctionComponent<IUrlShortnerProps> = () => {
     } catch (error) {
       console.error("Error shortening URL:", error);
       setErrorMessage("Error shortening URL. Please try again.");
+      console.log(errorMessage)
     }
   };
   
